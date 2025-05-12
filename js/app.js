@@ -1,9 +1,14 @@
-// Task 1: Array Manipulation Basics
+// Task 2: Add filtering and duplicate check
 
 const shoppingList = [];
 
 function addItemToList(item) {
-  shoppingList.push(item);
+  if (!item) return;
+  const itemLower = item.toLowerCase();
+  const exists = shoppingList.some(existing => existing.toLowerCase() === itemLower);
+  if (!exists) {
+    shoppingList.push(item);
+  }
 }
 
 function removeLastItem() {
@@ -16,4 +21,10 @@ function displayList() {
   shoppingList.forEach((item, index) => {
     console.log(`${index + 1}. ${item}`);
   });
+}
+
+function filterItems(searchTerm) {
+  return shoppingList.filter(item =>
+    item.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 }
